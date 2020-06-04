@@ -1,90 +1,90 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Card, CardBody, CardTitle, CardImg, CardText } from 'reactstrap';
 
 
-
-class DishDetail extends Component {
-
-
-    renderDish(select) {
-        if (select != null) {
-            return (
-                <Card>
-                    <CardImg top src={select.image} alt={select.name} />
-                    <CardBody>
-                        <CardTitle>{select.name}</CardTitle>
-                        <CardText>{select.description}</CardText>
-                    </CardBody>
-                </Card>
-            )
-        }
-        else {
-            return (
-                <div></div>
-            )
-        }
+function RenderDish({ select }) {
+    if (select != null) {
+        return (
+            <Card>
+                <CardImg top src={select.image} alt={select.name} />
+                <CardBody>
+                    <CardTitle>{select.name}</CardTitle>
+                    <CardText>{select.description}</CardText>
+                </CardBody>
+            </Card>
+        )
     }
-
-    rendercomments(select) {
-        if (select != null) {
-            return (
-                <div>
-                    <h4>Comments</h4>
-                    {
-                        select.comments.map((reviews) => {
-                            return (
-
-
-
-                                <div key={reviews.id}>
-
-                                    <ul className="list-unstyled">
-                                        <li className="m-2">{reviews.comment}</li>
-                                        <li></li>
-                                        <p className="m-2">-- {reviews.author}, {new Intl.DateTimeFormat('en-us',{year:'numeric',month:'short',day:'2-digit'}).format(new Date(Date.parse(reviews.date)))}</p>
-                                    </ul>
-                                </div>
-
-                            )
-
-                        })
-                    }
-                </div>
-
-            )
-
-        }
-        else {
-            return (
-                <div></div>
-            )
-
-        }
+    else {
+        return (
+            <div></div>
+        )
     }
+}
 
+function RenderComments({select}) {
+    if (select != null) {
+        return (
+            <div>
+                <h4>Comments</h4>
+                {
+                    select.comments.map((reviews) => {
+                        return (
+                            <div key={reviews.id}>
 
-    render() {
-        const select = this.props.dish;
+                                <ul className="list-unstyled">
+                                    <li className="m-2">{reviews.comment}</li>
+                                    <li></li>
+                                    <p className="m-2">-- {reviews.author}, {new Intl.DateTimeFormat('en-us', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(reviews.date)))}</p>
+                                </ul>
+                            </div>
+                        )
 
+                    })
+                }
+            </div>
+
+        )
+
+    }
+    else {
+        return (
+            <div></div>
+        )
+
+    }
+}
+
+const DishDetail = (props) => {
+    const select = props.dish;
+    if (select != null) {
         return (
             <div className="container">
                 <div className="row">
 
                     <div className="col-12 col-md-5 m-1">
-                        {this.renderDish(select)}
+                        <RenderDish select = {select}/>
                     </div>
                     <div className="col-12 col-md-5 m-1">
 
-                        {this.rendercomments(select)}
+                        <RenderComments select = {select}/>
                     </div>
 
                 </div>
 
             </div>
 
+
+
+        )
+
+    }
+    else{
+        return(
+            <div></div>
         )
     }
 
 }
+
 
 export default DishDetail
