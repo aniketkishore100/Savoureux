@@ -7,11 +7,13 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "bootstrap": "^4.0.0",
+    "jquery": "^1.9.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-popper": "^0.9.2",
     "react-scripts": "3.4.1",
-    "reactstrap": "^5.0.0"
+    "reactstrap": "^5.0.0",
+    "typescript": "^3.9.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -33,5 +35,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "bootstrap-social": "^5.1.1",
+    "font-awesome": "^4.7.0"
   }
 }
