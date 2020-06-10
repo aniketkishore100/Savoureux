@@ -86,7 +86,6 @@ class Contact extends Component {
     render() {
         
         const errors = this.validate(this.state.firstname,this.state.lastname,this.state.email,this.state.telnum ) 
-        console.log(errors)
         return (
             <div className="container">
                 <div className="row">
@@ -131,7 +130,7 @@ class Contact extends Component {
                                 <Label htmlFor='firstname' md={2}>First Name</Label>
                                 {/* using htmlFor instead of 'for' as we using jsx and it does not get confused with js-for and html-for */}
                                 <div className='col-md-10'>
-                                    <Input type='text' id='firstname' name='firstname' placeholder='First Name' 
+                                    <Input type='text' id='firstname' name='firstname' placeholder='First Name' required='true' 
                                     value={this.state.firstname} 
                                     valid={errors.firstname===''}
                                     invalid={errors.firstname!==''}
@@ -144,7 +143,7 @@ class Contact extends Component {
                             <FormGroup row>
                                 <Label htmlFor='lastname' md={2}>Last Name</Label>
                                 <div className='col-md-10'>
-                                    <Input type='text' name='lastname' id='lastname' placeholder='Last Name' value={this.state.lastname} 
+                                    <Input type='text' name='lastname' id='lastname' placeholder='Last Name' required ='true' value={this.state.lastname} 
                                     valid={errors.lastname===''}
                                     invalid={errors.lastname!==''}
                                     onChange={this.handleInputChange}
