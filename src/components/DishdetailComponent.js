@@ -1,7 +1,7 @@
-import React from 'react';
-import { Card, CardBody, CardTitle, CardImg, CardText ,Breadcrumb,BreadcrumbItem} from 'reactstrap';
+import React, { Component } from 'react';
+import { Card, CardBody, CardTitle, CardImg, CardText, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader, ModalBody, Label, Col, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
-
+import { LocalForm, Control, Errors } from 'react-redux-form'
 
 function RenderDish({ select }) {
     if (select != null) {
@@ -22,7 +22,7 @@ function RenderDish({ select }) {
     }
 }
 
-function RenderComments({selectedComments}) {
+function RenderComments({ selectedComments }) {
     if (selectedComments != null) {
         return (
             <div>
@@ -38,10 +38,13 @@ function RenderComments({selectedComments}) {
                                     <p className="m-2">-- {reviews.author}, {new Intl.DateTimeFormat('en-us', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(reviews.date)))}</p>
                                 </ul>
                             </div>
+
+
                         )
 
                     })
                 }
+                <CommentForm />
             </div>
 
         )
@@ -70,11 +73,12 @@ const DishDetail = (props) => {
                 <div className="row">
 
                     <div className="col-12 col-md-5 m-1">
-                        <RenderDish select = {select}/>
+                        <RenderDish select={select} />
                     </div>
                     <div className="col-12 col-md-5 m-1">
 
-                        <RenderComments selectedComments = {selectedComments}/>
+                        <RenderComments selectedComments={selectedComments} />
+
                     </div>
 
                 </div>
@@ -86,12 +90,95 @@ const DishDetail = (props) => {
         )
 
     }
-    else{
-        return(
+    else {
+        return (
             <div></div>
         )
     }
+}
+class CommentForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            commentModalOpen: false
+        }
+        this.toggleModal = this.toggleModal.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+    }
 
+    toggleModal() {
+        this.setState({
+            commentModalOpen: !this.state.commentModalOpen
+        })
+    }
+
+    handleSubmit(values) {
+        this.toggleModal()
+        console.log("Current Form Values: " + JSON.stringify(values))
+        alert("Current Form Values: " + JSON.stringify(values))
+
+    }
+    render() {
+        const minLength = (len) => (val) => !(val) || val.length >= len
+        const maxLength = (len) => (val) => (val) && val.length <= len
+        return (
+            <>
+                <div className='container'>
+                    <div>
+                        <Button outline onClick={this.toggleModal}>
+                            <span><i className='fa fa-pencil'></i> </span>
+                            Submit Comment
+                        </Button>
+                    </div>
+                    <Modal isOpen={this.state.commentModalOpen} toggle={this.toggleModal}>
+                        <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
+                        <ModalBody>
+                            <LocalForm onSubmit={(values) => { this.handleSubmit(values) }}>
+                                <Row className='form-group'>
+                                    <Col>
+                                        <Label htmlFor="rating">Rating</Label>
+                                        <Control.select model='.rating' name='rating' id='rating' className='form-control'>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </Control.select>
+                                    </Col>
+                                </Row>
+                                <Row className='form-group'>
+                                    <Col>
+                                        <Label htmlFor='author'>Your Name</Label>
+                                        <Control.text model=".author" name="author" id="author" className='form-control' validators=
+                                            {{
+                                                minLength: minLength(3), maxLength: maxLength(15)
+                                            }} />
+                                        <Errors
+                                            className='text-danger' model='.author' show='touched'
+                                            messages={{
+
+                                                minLength: "Must be Greater than 2 characters",
+                                                maxLength: "Must be 15 characters or Less"
+                                            }} />
+                                    </Col>
+
+                                </Row>
+                                <Row className='form-group'>
+                                    <Col>
+                                        <Label htmlFor='comment'>Comment</Label>
+                                        <Control.textarea model='.comment' name='comment' id='comment' rows='6' className='form-control' />
+                                    </Col>
+
+                                </Row>
+                                <Button type='submit' color='primary'>Submit</Button>
+                            </LocalForm>
+                        </ModalBody>
+                    </Modal>
+                </div>
+
+            </>
+        )
+    }
 }
 
 
