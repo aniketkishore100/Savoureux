@@ -22,7 +22,7 @@ function RenderDish({ select }) {
     }
 }
 
-function RenderComments({ selectedComments }) {
+function RenderComments({ selectedComments,addComment,dishId }) {
     if (selectedComments != null) {
         return (
             <div>
@@ -38,13 +38,10 @@ function RenderComments({ selectedComments }) {
                                     <p className="m-2">-- {reviews.author}, {new Intl.DateTimeFormat('en-us', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(reviews.date)))}</p>
                                 </ul>
                             </div>
-
-
                         )
-
                     })
                 }
-                <CommentForm />
+                <CommentForm dishId ={dishId} addComment={addComment}/>
             </div>
 
         )
@@ -77,7 +74,9 @@ const DishDetail = (props) => {
                     </div>
                     <div className="col-12 col-md-5 m-1">
 
-                        <RenderComments selectedComments={selectedComments} />
+                        <RenderComments selectedComments={selectedComments} 
+                        addComment = {props.addComment}
+                        dishId = {props.dish.id}/>
 
                     </div>
 
@@ -114,8 +113,7 @@ class CommentForm extends Component {
 
     handleSubmit(values) {
         this.toggleModal()
-        console.log("Current Form Values: " + JSON.stringify(values))
-        alert("Current Form Values: " + JSON.stringify(values))
+        this.props.addComment(this.props.dishId,values.rating,values.author,values.comment)
 
     }
     render() {
