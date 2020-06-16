@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card, CardBody, CardTitle, CardImg, CardText, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader, ModalBody, Label, Col, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { LocalForm, Control, Errors } from 'react-redux-form'
+import {Loading} from './LoadingComponent'
 
 function RenderDish({ select }) {
     if (select != null) {
@@ -22,7 +23,7 @@ function RenderDish({ select }) {
     }
 }
 
-function RenderComments({ selectedComments,addComment,dishId }) {
+function RenderComments({ selectedComments, addComment, dishId }) {
     if (selectedComments != null) {
         return (
             <div>
@@ -41,7 +42,7 @@ function RenderComments({ selectedComments,addComment,dishId }) {
                         )
                     })
                 }
-                <CommentForm dishId ={dishId} addComment={addComment}/>
+                <CommentForm dishId={dishId} addComment={addComment} />
             </div>
 
         )
@@ -58,7 +59,27 @@ function RenderComments({ selectedComments,addComment,dishId }) {
 const DishDetail = (props) => {
     const select = props.dish;
     const selectedComments = props.comment
-    if (select != null) {
+    if (props.isLoading) {
+        return (
+            <div className="container">
+                <div className='row'>
+                    <Loading />
+                </div>
+            </div>
+        )
+
+
+    }
+    else if (props.errmess) {
+        return (
+            <div className="container">
+                <div className='row'>
+                    <h4>{props.errmess}</h4>
+                </div>
+            </div>
+        )
+    }
+    else if (select != null) {
         return (
             <div className="container">
                 <div className="row">
@@ -74,9 +95,9 @@ const DishDetail = (props) => {
                     </div>
                     <div className="col-12 col-md-5 m-1">
 
-                        <RenderComments selectedComments={selectedComments} 
-                        addComment = {props.addComment}
-                        dishId = {props.dish.id}/>
+                        <RenderComments selectedComments={selectedComments}
+                            addComment={props.addComment}
+                            dishId={props.dish.id} />
 
                     </div>
 
@@ -113,7 +134,7 @@ class CommentForm extends Component {
 
     handleSubmit(values) {
         this.toggleModal()
-        this.props.addComment(this.props.dishId,values.rating,values.author,values.comment)
+        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment)
 
     }
     render() {
