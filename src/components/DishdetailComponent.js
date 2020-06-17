@@ -3,12 +3,13 @@ import { Card, CardBody, CardTitle, CardImg, CardText, Breadcrumb, BreadcrumbIte
 import { Link } from 'react-router-dom';
 import { LocalForm, Control, Errors } from 'react-redux-form'
 import {Loading} from './LoadingComponent'
+import { baseUrl } from '../shared/baseUrl'
 
 function RenderDish({ select }) {
     if (select != null) {
         return (
             <Card>
-                <CardImg top src={select.image} alt={select.name} />
+                <CardImg top src={baseUrl+select.image} alt={select.name} />
                 <CardBody>
                     <CardTitle>{select.name}</CardTitle>
                     <CardText>{select.description}</CardText>
@@ -58,7 +59,7 @@ function RenderComments({ selectedComments, addComment, dishId }) {
 
 const DishDetail = (props) => {
     const select = props.dish;
-    const selectedComments = props.comment
+    const selectedComments = props.comments
     if (props.isLoading) {
         return (
             <div className="container">

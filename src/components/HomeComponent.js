@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardImg, CardBody, CardText, CardTitle, CardSubtitle } from 'reactstrap'
 import { Loading } from './LoadingComponent'
+import { baseUrl } from '../shared/baseUrl'
 
 // we can add the RenderCard component here itself as it will not be used anywhere else as a component only in this file hence we add the RenderCard comp here itself
 function RenderCard({ item ,isLoading,errmess}) {
@@ -25,7 +26,7 @@ function RenderCard({ item ,isLoading,errmess}) {
     else
         return (
             <Card>
-                <CardImg src={item.image} alt={item.name} />
+                <CardImg src={baseUrl + item.image} alt={item.name} />
                 <CardBody>
                     <CardTitle>{item.name}</CardTitle>
                     {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null}
@@ -45,7 +46,7 @@ function Home(props) {
                     <RenderCard item={props.dish} isLoading={props.dishesLoading} errmess = {props.dishesErrmess} />
                 </div>
                 <div className="col-12 col-md m-1">
-                    <RenderCard item={props.promotion} />
+                    <RenderCard item={props.promotion} isLoading={props.promoLoading} errmess = {props.promoErrmess}/>
                 </div>
                 <div className="col-12 col-md m-1">
                     <RenderCard item={props.leader} />
