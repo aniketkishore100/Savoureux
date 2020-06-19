@@ -2,19 +2,22 @@ import React, { Component } from 'react';
 import { Card, CardBody, CardTitle, CardImg, CardText, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader, ModalBody, Label, Col, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { LocalForm, Control, Errors } from 'react-redux-form'
-import {Loading} from './LoadingComponent'
+import { Loading } from './LoadingComponent'
 import { baseUrl } from '../shared/baseUrl'
+import { FadeTransform, Stagger, Fade } from 'react-animation-components';
 
 function RenderDish({ select }) {
     if (select != null) {
         return (
-            <Card>
-                <CardImg top src={baseUrl+select.image} alt={select.name} />
-                <CardBody>
-                    <CardTitle>{select.name}</CardTitle>
-                    <CardText>{select.description}</CardText>
-                </CardBody>
-            </Card>
+            <FadeTransform in transformProps={{ exitTransform: 'scale(0.5) translateY(-50%)' }}>
+                <Card>
+                    <CardImg top src={baseUrl + select.image} alt={select.name} />
+                    <CardBody>
+                        <CardTitle>{select.name}</CardTitle>
+                        <CardText>{select.description}</CardText>
+                    </CardBody>
+                </Card>
+            </FadeTransform>
         )
     }
     else {
@@ -24,25 +27,26 @@ function RenderDish({ select }) {
     }
 }
 
-function RenderComments({ selectedComments,postComment, dishId }) {
+function RenderComments({ selectedComments, postComment, dishId }) {
     if (selectedComments != null) {
         return (
             <div>
                 <h4>Comments</h4>
-                {
-                    selectedComments.map((reviews) => {
-                        return (
-                            <div key={reviews.id}>
-
-                                <ul className="list-unstyled">
-                                    <li className="m-2">{reviews.comment}</li>
-                                    <li></li>
-                                    <p className="m-2">-- {reviews.author}, {new Intl.DateTimeFormat('en-us', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(reviews.date)))}</p>
-                                </ul>
-                            </div>
-                        )
-                    })
-                }
+                <ul className="list-unstyled">
+                    <Stagger in>
+                        {selectedComments.map((reviews) => {
+                            return (
+                                <Fade in>
+                                    <li key={reviews.id}>
+                                        <li className="m-2">{reviews.comment}</li>
+                                        <li></li>
+                                        <p className="m-2">-- {reviews.author}, {new Intl.DateTimeFormat('en-us', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(reviews.date)))}</p>
+                                    </li>
+                                </Fade>
+                            )
+                        })}
+                    </Stagger>
+                </ul>
                 <CommentForm dishId={dishId} postComment={postComment} />
             </div>
 

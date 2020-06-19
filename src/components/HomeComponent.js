@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardImg, CardBody, CardText, CardTitle, CardSubtitle } from 'reactstrap'
 import { Loading } from './LoadingComponent'
 import { baseUrl } from '../shared/baseUrl'
+import { FadeTransform } from 'react-animation-components'
 
 // we can add the RenderCard component here itself as it will not be used anywhere else as a component only in this file hence we add the RenderCard comp here itself
 function RenderCard({ item ,isLoading,errmess}) {
@@ -25,6 +26,7 @@ function RenderCard({ item ,isLoading,errmess}) {
     }
     else
         return (
+            <FadeTransform in transformProps ={{exitTransform:"scale(0.5) translateY(-50%) "}}>
             <Card>
                 <CardImg src={baseUrl + item.image} alt={item.name} />
                 <CardBody>
@@ -33,6 +35,7 @@ function RenderCard({ item ,isLoading,errmess}) {
                     <CardText>{item.description}</CardText>
                 </CardBody>
             </Card>
+            </FadeTransform>
         )
 
 }
