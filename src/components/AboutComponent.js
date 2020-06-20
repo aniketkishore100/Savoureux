@@ -1,36 +1,51 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { Fade, Stagger } from 'react-animation-components';
+import { Loading } from './LoadingComponent'
+import { baseUrl } from '../shared/baseUrl';
 
-function RenderLeader({leader}){
-    return(
-        <Media tag='li'>
-            <Media left middle>
-                <Media object src={leader.image} alt={leader.name}/>
-            </Media>
-            <Media body className='ml-5'>
-                <Media heading>{leader.name}</Media>
-                <Media sub>{leader.designation}</Media>
-                <br />
-                <p>{leader.description}</p>
-            </Media>
-        </Media>
-        
+function RenderLeader({ leader }) {
+    return (
+        <Fade in>
+            <Media tag='li'>
+
+                <Media left middle>
+                    <Media object src={baseUrl + leader.image} alt={leader.name} />
+                </Media>
+                <Media body className='ml-5'>
+                    <Media heading>{leader.name}</Media>
+                    <Media sub>{leader.designation}</Media>
+                    <br />
+                    <p>{leader.description}</p>
+                </Media>
+            </Media>    
+        </Fade>
     )
-    }
-    
+}
+
 
 
 function About(props) {
 
-    const leaders = props.leaders.map((leader)=>{
-        return(
-            <RenderLeader leader = {leader}/>
+    const leaders = 
+    <Stagger in>
+    {props.leaders.map((leader) => {
+        if(props.isLoading){
+            return(
+                <Loading/>
+            )
+        }
+        else
+        return (
+            <RenderLeader leader={leader} />
         )
-        })
+    })}
+    </Stagger>
 
 
-    return(
+
+    return (
         <div className="container">
             <div className="row">
                 <Breadcrumb>
@@ -40,7 +55,7 @@ function About(props) {
                 <div className="col-12">
                     <h3>About Us</h3>
                     <hr />
-                </div>                
+                </div>
             </div>
             <div className="row row-content">
                 <div className="col-12 col-md-6">
@@ -84,7 +99,7 @@ function About(props) {
                 <div className="col-12">
                     <h2>Corporate Leadership</h2>
                 </div>
-                <div className="col-12">
+                <div className='col-12'>
                     {leaders}
                 </div>
             </div>

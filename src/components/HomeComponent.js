@@ -52,7 +52,7 @@ function Home(props) {
                     <RenderCard item={props.promotion} isLoading={props.promosLoading} errmess = {props.promosErrmess}/>
                 </div>
                 <div className="col-12 col-md m-1">
-                    <RenderCard item={props.leader} />
+                    <RenderCard item={props.leader} isLoading = {props.leaderLoading} errmess = {props.leaderErrmess}/>
                 </div>
                 {/* here all the props are named the same because all the props ie dish promotion and leader have the same file structure so we can use the same variable in a caseee where all the json files have diff structurewe should give different names to all three instead of item  */}
             </div>
