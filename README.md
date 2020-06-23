@@ -13,7 +13,7 @@ The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
 ### `json-server --watch db.json -p 3001 -d 2000`
-Runs the json-server to provide information through forms to be stored in db.json, also includes images and information for the leaders,comments,promotions and dishes.
+Runs the json-server to provide information through forms to be stored in db.json, also includes images and information for the leaders,comments,promotions and dishes.<br/>
 **Note:** To run the json-server successfully navigate to the json-server first `cd ./json-server`and then use the command given above 
 
 ### `npm test`
