@@ -214,10 +214,5 @@ export const postFeedback = (firstname,lastname,telnum,email,agree,contactType,m
         credentials: 'same-origin'
     })
     .then(response=>response.json()) 
-    .then(data => dispatch(addFeedback(data)))
-    .then(response=>alert('Thanks for your Feedback! \n'+ JSON.stringify(response.payload)))
+    .then(response=>alert('Thanks for your Feedback! \n'+ JSON.stringify(response)))
 }
-export const addFeedback = (feedback) =>({
-    type:ActionTypes.POST_FEEDBACK,
-    payload: feedback
-})

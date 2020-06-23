@@ -7,9 +7,8 @@ import { baseUrl } from '../shared/baseUrl';
 
 function RenderLeader({ leader }) {
     return (
-        <Fade in>
+            <Media>
             <Media tag='li'>
-
                 <Media left middle>
                     <Media object src={baseUrl + leader.image} alt={leader.name} />
                 </Media>
@@ -19,31 +18,26 @@ function RenderLeader({ leader }) {
                     <br />
                     <p>{leader.description}</p>
                 </Media>
-            </Media>    
-        </Fade>
+            </Media>  
+            </Media>  
     )
 }
 
 
 
 function About(props) {
-
-    const leaders = 
-    <Stagger in>
-    {props.leaders.map((leader) => {
-        if(props.isLoading){
-            return(
-                <Loading/>
-            )
-        }
-        else
+    let leaders = '';
+    if(props.isLoading){
+        leaders = <Loading/>
+    }
+    else{
+    leaders = props.leaders.map((leader) => {
         return (
+            <Fade in>
             <RenderLeader leader={leader} />
+            </Fade>
         )
     })}
-    </Stagger>
-
-
 
     return (
         <div className="container">
@@ -100,7 +94,7 @@ function About(props) {
                     <h2>Corporate Leadership</h2>
                 </div>
                 <div className='col-12'>
-                    {leaders}
+                    <Stagger in>{leaders}</Stagger>
                 </div>
             </div>
         </div>
