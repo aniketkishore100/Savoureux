@@ -13,8 +13,10 @@ function RenderDish({ select }) {
                 <Card>
                     <CardImg top src={baseUrl + select.image} alt={select.name} />
                     <CardBody>
+                        <div className="card">
                         <CardTitle>{select.name}</CardTitle>
                         <CardText>{select.description}</CardText>
+                        </div>
                     </CardBody>
                 </Card>
             </FadeTransform>

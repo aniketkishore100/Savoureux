@@ -1,37 +1,47 @@
+.App{
+  color:azure;
+  background-color:#7e938c;
+}
+
 .row-header{
   margin:0px auto;
   padding:0px auto;
 }
-
 .row-content {
   margin:0px auto;
   padding: 50px 0px 50px 0px;
   border-bottom: 1px ridge;
   min-height:400px;
 }
-
+.card{
+  background-color: #ab7c48;
+}
 .footer{
-  background-color: #D1C4E9;
+  background-color: #252d38;
+  color:#fdf5e3;
   margin:0px auto;
   padding: 20px 0px 20px 0px;
 }
 .jumbotron {
   padding:70px 30px 70px 30px;
   margin:0px auto;
-  background: #9575CD ;
+  background: #252d38 ;
   color:floralwhite;
 }
 
 address{
   font-size:80%;
   margin:0px;
-  color:#0f0f0f;
+  color:#fdf5e3;
 }
 
 .navbar-dark {
-  background-color: #512DA8;
+  background-color: #ab7c48;
 }
-
+.my_image{
+  height:120px;
+  width:120px;
+ }
 .page-enter{
   opacity: 0.01%;
   transform: translateY(-100%);

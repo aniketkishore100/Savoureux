@@ -41,7 +41,7 @@ class Header extends Component {
                     <div className="container" >
                         <NavbarToggler onClick={this.toggleNav} />
                         <NavbarBrand href="/" className="mr-auto">
-                            <img height="30" width="41" src="assets/images/logo.png" alt="Ristorante Con Fusion" />
+                            <img height="30" width="41" src="assets/images/logo.png" alt="Savoureux" />
                         </NavbarBrand>
                         <Collapse isOpen={this.state.isNavOpen} navbar>
                             <Nav navbar>
@@ -70,8 +70,8 @@ class Header extends Component {
                     <div className="container">
                         <div className="row row-header">
                             <div className="col-12 col-sm-6">
-                                <h1>Ristorante con Fusion</h1>
-                                <p>We take inspiration from the World's best cuisines, and create a unique fusion experience. Our lipsmacking creations will tickle your culinary senses!</p>
+                                <h1>Savoureux</h1>
+                                <p>The delight of French taste</p>
                             </div>
                         </div>
                     </div>
