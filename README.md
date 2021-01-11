@@ -1,4 +1,24 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Savoureux
+
+Savoureux is a responsive restaurant website enabled with animations, clean and simple UI and all the functionalities of a needed by a restaurant in a website. The website is capable of promoting highlights of the week for the website on its home route, routing helps the user to route to different sections of the website which include:
+  - Home
+  - About Us
+  - Menu 
+  - Contact Us
+  
+The webstie allows Authentication of the user to login as a registered user or use the website as a guest. The website allows logged in users to comment and rate (on a scale of 1-5) the dishes present on the menu for a better reach and attract new new users or customers for the website.
+
+## Screenshots
+### Home Page:
+![Home](public/assets/Demo/Home.png)
+### About Us Page
+![About Us](public/assets/Demo/aboutus.png)
+### Menu:
+![Menu](public/assets/Demo/Menu.png)
+### Comments:
+![MenuDish](public/assets/Demo/MenuDish.png)
+### Contact Us:
+![ContactUS](public/assets/Demo/contactUs.png)
 
 ## Available Scripts
 
